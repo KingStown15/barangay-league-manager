@@ -1,0 +1,11 @@
+{
+  "name": "Barangay League Manager",
+  "short_name": "League Manager",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#12213D",
+  "theme_color": "#12213D",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
