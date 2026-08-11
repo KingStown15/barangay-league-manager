@@ -1,0 +1,48 @@
+# Dependencies and generated output
+node_modules/
+dist/
+build/
+coverage/
+.cache/
+.vite/
+
+# Environment and local runtime configuration
+.env
+.env.*
+!.env.example
+*.pid
+*.log
+
+# Local databases and private runtime data
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+*.sqlite-journal
+database/
+databases/
+uploads/
+backups/
+updates/
+release-output/
+logs/
+tmp/
+temp/
+
+# Archives and local QA exports
+*.zip
+*.tar
+*.tgz
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local screenshots and generated captures
+screenshots/
+frontend/screenshots/
+screenshot.mjs

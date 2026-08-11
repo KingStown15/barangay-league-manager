@@ -1,0 +1,16 @@
+{
+  "name": "barangay-league-manager",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Offline-first barangay sports league management system",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "scripts": {
+    "verify": "npm --prefix backend test && npm --prefix frontend run build && npm --prefix backend audit --omit=dev && npm --prefix frontend audit",
+    "build": "npm --prefix frontend run build",
+    "seed": "node backend/db/seed.js",
+    "setup": "node backend/scripts/ensure-config.js",
+    "start": "npm --prefix backend start"
+  }
+}
