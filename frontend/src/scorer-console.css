@@ -1,0 +1,292 @@
+:root {
+  --console-bg: #030B14;
+  --console-panel: #071522;
+  --console-panel-strong: #0A1C2C;
+  --console-border: #1D3345;
+  --console-text: #F8FAFC;
+  --console-muted: #91A4B7;
+  --console-blue: #2F8CFF;
+  --console-red: #FF4949;
+  --console-green: #55D96B;
+  --console-amber: #F5A524;
+}
+
+.scorer-console-root {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 0%, #102B40 0%, var(--console-bg) 48%);
+  color: var(--console-text);
+}
+
+.scorer-console-root button {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.scorer-console-landscape {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+.console-header {
+  position: relative;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto 48px;
+  align-items: center;
+  gap: 10px;
+  min-height: 58px;
+  padding: 6px 14px;
+  border-bottom: 1px solid var(--console-border);
+  background: rgba(3, 11, 20, .94);
+}
+
+.console-icon-button {
+  display: inline-flex;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--console-text);
+}
+
+.console-icon-button:hover, .console-icon-button:focus-visible { border-color: var(--console-border); background: var(--console-panel); }
+.console-header-identity { min-width: 0; }
+.console-header-identity span, .console-header-identity strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.console-header-identity span { color: var(--console-blue); font-size: 10px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+.console-header-identity strong { margin-top: 2px; font-size: 16px; }
+.console-header-meta { display: flex; align-items: center; gap: 7px; }
+.console-header-meta span { padding: 4px 7px; border: 1px solid var(--console-border); border-radius: 6px; color: var(--console-muted); font-size: 10px; font-weight: 800; white-space: nowrap; }
+.console-landscape-mark { display: none; }
+
+.console-status-bar {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-bottom: 1px solid var(--console-border);
+  background: var(--console-panel);
+}
+
+.console-status-item { display: flex; min-width: 0; align-items: center; justify-content: center; gap: 6px; min-height: 35px; padding: 4px 8px; border-right: 1px solid var(--console-border); }
+.console-status-item:last-child { border-right: 0; }
+.console-status-item span { color: var(--console-muted); font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.console-status-item strong { overflow: hidden; color: var(--console-text); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.console-status-item.live strong, .console-status-item.danger strong { color: var(--console-red); }
+.console-status-item.success strong { color: var(--console-green); }
+.console-status-item.warning strong { color: var(--console-amber); }
+
+.console-stage { min-height: 0; overflow: auto; overscroll-behavior: contain; }
+.console-shell-preview { display: grid; grid-template-columns: minmax(0, 1fr) minmax(180px, .6fr) minmax(0, 1fr); min-height: 100%; align-items: stretch; }
+.console-shell-preview article, .console-shell-preview > div { display: flex; min-width: 0; flex-direction: column; align-items: center; justify-content: center; padding: 18px; text-align: center; }
+.console-shell-preview article:first-child { border-right: 1px solid var(--console-border); box-shadow: inset 4px 0 var(--console-blue); }
+.console-shell-preview article:last-child { border-left: 1px solid var(--console-border); box-shadow: inset -4px 0 var(--console-red); }
+.console-shell-preview article span { color: var(--console-muted); font-size: 10px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+.console-shell-preview article strong { max-width: 100%; margin-top: 8px; overflow-wrap: anywhere; font-size: clamp(22px, 4vw, 42px); line-height: 1.08; }
+.console-shell-preview > div { gap: 7px; color: var(--console-muted); }
+.console-shell-preview > div strong { color: var(--console-text); font-size: 15px; }
+.console-shell-preview > div span { font-size: 11px; }
+
+.console-action-feedback { display: flex; min-height: 33px; align-items: center; justify-content: center; gap: 8px; padding: 5px 12px; border-top: 1px solid var(--console-border); color: var(--console-muted); font-size: 11px; font-weight: 750; text-align: center; }
+.console-feedback-dot { width: 7px; height: 7px; flex: 0 0 auto; border-radius: 999px; background: #64748B; }
+.console-action-feedback.accepted .console-feedback-dot { background: var(--console-green); }
+.console-action-feedback.pending .console-feedback-dot { background: var(--console-amber); animation: livePulse 1s infinite; }
+.console-action-feedback.rejected, .console-action-feedback.stale { color: #FCA5A5; }
+.console-action-feedback.rejected .console-feedback-dot, .console-action-feedback.stale .console-feedback-dot { background: var(--console-red); }
+
+.console-footer { display: grid; grid-template-columns: minmax(180px, 1.3fr) 1fr 1fr auto; gap: 8px; padding: 8px 12px; border-top: 1px solid var(--console-border); background: rgba(3, 11, 20, .96); }
+.console-footer-button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 7px; padding: 8px 12px; border: 1px solid var(--console-border); border-radius: 9px; background: var(--console-panel); color: var(--console-text); font-size: 11px; font-weight: 850; }
+.console-footer-button.arm { border-color: #2DB64A; color: var(--console-green); }
+.console-footer-button.disarm { border-color: #B93A3A; color: #FF8A8A; }
+.console-footer-button:disabled { cursor: not-allowed; opacity: .4; }
+.console-footer-safety { display: inline-flex; align-items: center; gap: 5px; padding: 0 6px; color: var(--console-muted); font-size: 9px; font-weight: 750; white-space: nowrap; }
+
+.console-more-actions { display: grid; gap: 10px; }
+.console-more-actions button { display: flex; min-height: 58px; align-items: center; gap: 12px; padding: 12px; border: 1px solid var(--color-border); border-radius: 10px; background: #FFF; color: var(--color-text); text-align: left; }
+.console-more-actions button.danger { border-color: #FECACA; color: #B91C1C; }
+.console-more-actions button:disabled { cursor: not-allowed; opacity: .45; }
+.console-more-actions span, .console-more-actions strong, .console-more-actions small { display: block; }
+.console-more-actions small { margin-top: 2px; color: var(--color-text-muted); }
+
+.console-action-button { display: inline-flex; min-width: 0; min-height: 48px; align-items: center; justify-content: center; gap: 5px; padding: 7px 8px; border: 1px solid var(--console-border); border-radius: 8px; background: #07111D; color: var(--console-text); font-size: 13px; font-weight: 900; line-height: 1; }
+.console-action-button.blue { border-color: #2379DA; color: #58A6FF; }
+.console-action-button.red { border-color: #D13C45; color: #FF666E; }
+.console-action-button.green { border-color: #278C3A; color: var(--console-green); }
+.console-action-button.amber { border-color: #9C6418; color: var(--console-amber); }
+.console-action-button:disabled { cursor: not-allowed; opacity: .36; filter: saturate(.55); }
+.console-action-button:focus-visible, .console-footer-button:focus-visible { outline: 2px solid var(--console-text); outline-offset: 2px; }
+.console-action-button:not(:disabled):active { transform: translateY(1px); filter: brightness(1.22); }
+
+.basketball-console { display: grid; grid-template-columns: minmax(0, 1fr) minmax(245px, .76fr) minmax(0, 1fr); min-height: 100%; }
+.basketball-console-team { display: grid; min-width: 0; grid-template-rows: auto minmax(48px, 1fr) auto; align-items: center; gap: 5px; padding: 8px 10px; }
+.basketball-console-team.side-a { border-right: 1px solid var(--console-border); box-shadow: inset 4px 0 var(--console-blue); }
+.basketball-console-team.side-b { border-left: 1px solid var(--console-border); box-shadow: inset -4px 0 var(--console-red); }
+.basketball-team-name { min-width: 0; text-align: center; }
+.basketball-team-name span, .basketball-team-name strong { display: block; }
+.basketball-team-name span { color: var(--console-muted); font-size: 8px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+.basketball-team-name strong { overflow: hidden; font-size: clamp(12px, 2vw, 19px); text-overflow: ellipsis; white-space: nowrap; }
+.basketball-console-team.side-a .basketball-team-name strong { color: #58A6FF; }
+.basketball-console-team.side-b .basketball-team-name strong { color: #FF666E; }
+.basketball-team-score { color: var(--console-text); font-size: clamp(44px, 8.2vw, 76px); font-weight: 950; font-variant-numeric: tabular-nums; letter-spacing: -.05em; line-height: .92; text-align: center; }
+.basketball-score-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; }
+.basketball-score-actions .basketball-undo { grid-column: span 2; }
+
+.basketball-console-clock { position: relative; display: grid; min-width: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto auto minmax(0, 1fr); align-items: center; gap: 5px; padding: 7px 8px; text-align: center; }
+.basketball-period { grid-column: 1 / -1; justify-self: center; padding: 2px 10px; border: 1px solid var(--console-border); border-radius: 6px; color: var(--console-text); font-size: 12px; font-weight: 900; }
+.basketball-game-clock { font-size: clamp(30px, 5vw, 48px); font-weight: 950; font-variant-numeric: tabular-nums; letter-spacing: -.04em; line-height: 1; }
+.basketball-shot-clock { display: flex; flex-direction: column; align-items: center; justify-content: center; border-left: 1px solid var(--console-border); }
+.basketball-shot-clock span { color: var(--console-muted); font-size: 8px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+.basketball-shot-clock output { color: var(--console-red); font-size: clamp(28px, 4vw, 42px); font-weight: 950; font-variant-numeric: tabular-nums; line-height: 1; }
+.basketball-shot-clock.expired output { animation: livePulse 1s infinite; }
+.basketball-clock-actions { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-self: end; gap: 5px; }
+.basketball-clock-actions .console-action-button { min-height: 48px; padding-inline: 4px; font-size: 9px; }
+.basketball-pending-action { position: absolute; right: 8px; bottom: 59px; left: 8px; padding: 3px; border-radius: 5px; background: rgba(245,165,36,.16); color: var(--console-amber); font-size: 9px; font-weight: 800; }
+
+.basketball-time-fields { display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 10px; }
+.basketball-time-fields label { color: var(--color-text-muted); font-size: 12px; font-weight: 800; }
+.basketball-time-fields input { width: 100%; min-height: 48px; margin-top: 5px; padding: 8px; border: 1px solid var(--color-border); border-radius: 8px; font-size: 22px; text-align: center; }
+.basketball-time-fields > span { padding-bottom: 11px; font-size: 24px; font-weight: 900; }
+.basketball-time-fields p { grid-column: 1 / -1; margin: 0; color: var(--color-danger); font-size: 12px; }
+
+.volleyball-console { display: grid; grid-template-columns: minmax(0, 1fr) minmax(255px, .8fr) minmax(0, 1fr); min-height: 100%; }
+.volleyball-console-team { display: grid; min-width: 0; grid-template-rows: auto minmax(48px, 1fr) auto; align-items: center; gap: 6px; padding: 8px 12px; }
+.volleyball-console-team.position-left { border-right: 1px solid var(--console-border); }
+.volleyball-console-team.position-right { border-left: 1px solid var(--console-border); }
+.volleyball-console-team.side-a { box-shadow: inset 4px 0 var(--console-blue); }
+.volleyball-console-team.side-b { box-shadow: inset -4px 0 var(--console-red); }
+.volleyball-console-team.position-left.side-b { box-shadow: inset 4px 0 var(--console-red); }
+.volleyball-console-team.position-right.side-a { box-shadow: inset -4px 0 var(--console-blue); }
+.volleyball-team-name { min-width: 0; text-align: center; }
+.volleyball-team-name span, .volleyball-team-name strong { display: block; }
+.volleyball-team-name span { color: var(--console-muted); font-size: 8px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+.volleyball-team-name strong { overflow: hidden; font-size: clamp(12px, 2vw, 19px); text-overflow: ellipsis; white-space: nowrap; }
+.volleyball-console-team.side-a .volleyball-team-name strong { color: #58A6FF; }
+.volleyball-console-team.side-b .volleyball-team-name strong { color: #FF666E; }
+.volleyball-team-score { color: var(--console-text); font-size: clamp(44px, 8.2vw, 76px); font-weight: 950; font-variant-numeric: tabular-nums; letter-spacing: -.05em; line-height: .92; text-align: center; }
+.volleyball-score-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; }
+.volleyball-score-actions .volleyball-undo { grid-column: 1 / -1; }
+.volleyball-console-center { position: relative; display: grid; min-width: 0; align-content: center; gap: 5px; padding: 7px 8px; text-align: center; }
+.volleyball-set-heading { display: flex; align-items: center; justify-content: center; gap: 12px; }
+.volleyball-set-heading > span { padding: 2px 9px; border: 1px solid var(--console-border); border-radius: 6px; font-size: 11px; font-weight: 900; text-transform: uppercase; }
+.volleyball-set-heading > strong { font-size: 20px; font-variant-numeric: tabular-nums; }
+.volleyball-set-heading small { color: var(--console-muted); font-size: 8px; letter-spacing: .08em; }
+.volleyball-rule-message { display: flex; min-height: 38px; flex-direction: column; align-items: center; justify-content: center; padding: 4px 7px; border: 1px solid var(--console-border); border-radius: 7px; background: rgba(255,255,255,.025); }
+.volleyball-rule-message strong { font-size: 10px; letter-spacing: .04em; }
+.volleyball-rule-message span { margin-top: 2px; color: var(--console-muted); font-size: 8px; }
+.volleyball-rule-message.warning strong { color: var(--console-amber); }
+.volleyball-rule-message.success strong { color: var(--console-green); }
+.volleyball-match-format { color: var(--console-muted); font-size: 8px; font-weight: 800; text-transform: uppercase; }
+.volleyball-set-history { display: flex; min-width: 0; justify-content: center; gap: 4px; overflow: hidden; }
+.volleyball-set-history span { min-width: 0; padding: 2px 5px; border: 1px solid var(--console-border); border-radius: 5px; color: var(--console-muted); font-size: 8px; font-weight: 800; white-space: nowrap; }
+.volleyball-screen-swap { color: var(--console-amber); font-size: 8px; font-weight: 800; }
+.volleyball-confirm-set { width: 100%; }
+.volleyball-pending-action { position: absolute; right: 8px; bottom: 59px; left: 8px; padding: 3px; border-radius: 5px; background: rgba(245,165,36,.16); color: var(--console-amber); font-size: 9px; font-weight: 800; }
+
+.pickleball-console { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 1.05fr) minmax(0, 1fr); min-height: 100%; }
+.pickleball-console-team { display: grid; min-width: 0; grid-template-rows: auto minmax(42px, 1fr) auto auto; align-items: center; gap: 4px; padding: 7px 10px; }
+.pickleball-console-team.position-left { border-right: 1px solid var(--console-border); }
+.pickleball-console-team.position-right { border-left: 1px solid var(--console-border); }
+.pickleball-console-team.side-a { box-shadow: inset 4px 0 var(--console-blue); }
+.pickleball-console-team.side-b { box-shadow: inset -4px 0 var(--console-red); }
+.pickleball-console-team.position-left.side-b { box-shadow: inset 4px 0 var(--console-red); }
+.pickleball-console-team.position-right.side-a { box-shadow: inset -4px 0 var(--console-blue); }
+.pickleball-console-team.serving { background: linear-gradient(180deg, rgba(85,217,107,.07), transparent 60%); }
+.pickleball-team-name { min-width: 0; text-align: center; }
+.pickleball-team-name span, .pickleball-team-name strong, .pickleball-team-name em { display: block; }
+.pickleball-team-name span { color: var(--console-muted); font-size: 8px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+.pickleball-team-name strong { overflow: hidden; font-size: clamp(12px, 1.8vw, 18px); text-overflow: ellipsis; white-space: nowrap; }
+.pickleball-team-name em { margin-top: 2px; color: var(--console-green); font-size: 8px; font-style: normal; font-weight: 900; text-transform: uppercase; }
+.pickleball-console-team.side-a .pickleball-team-name strong { color: #58A6FF; }
+.pickleball-console-team.side-b .pickleball-team-name strong { color: #FF666E; }
+.pickleball-team-points { color: var(--console-text); font-size: clamp(42px, 7.5vw, 70px); font-weight: 950; font-variant-numeric: tabular-nums; letter-spacing: -.05em; line-height: .92; text-align: center; }
+.pickleball-team-games { color: var(--console-muted); font-size: 9px; font-weight: 800; text-align: center; text-transform: uppercase; }
+.pickleball-team-games strong { color: var(--console-text); font-size: 13px; }
+.pickleball-score-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; }
+.pickleball-console-center { position: relative; display: grid; min-width: 0; align-content: center; gap: 4px; padding: 6px; text-align: center; }
+.pickleball-game-heading { display: flex; align-items: center; justify-content: center; gap: 11px; }
+.pickleball-game-heading > span { padding: 2px 8px; border: 1px solid var(--console-border); border-radius: 6px; font-size: 10px; font-weight: 900; text-transform: uppercase; }
+.pickleball-game-heading > strong { font-size: 19px; font-variant-numeric: tabular-nums; }
+.pickleball-game-heading small { color: var(--console-muted); font-size: 8px; letter-spacing: .08em; }
+.pickleball-state-message { display: flex; min-height: 30px; flex-direction: column; align-items: center; justify-content: center; padding: 3px 7px; border: 1px solid var(--console-border); border-radius: 7px; }
+.pickleball-state-message strong { font-size: 9px; letter-spacing: .04em; }
+.pickleball-state-message span { margin-top: 1px; color: var(--console-muted); font-size: 8px; }
+.pickleball-state-message.warning strong { color: var(--console-amber); }
+.pickleball-state-message.success strong { color: var(--console-green); }
+.pickleball-service-state { min-width: 0; }
+.pickleball-service-state span, .pickleball-service-state strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pickleball-service-state span { color: var(--console-green); font-size: 8px; font-weight: 900; text-transform: uppercase; }
+.pickleball-service-state strong { font-size: 10px; }
+.pickleball-format { color: var(--console-muted); font-size: 8px; font-weight: 800; text-transform: uppercase; }
+.pickleball-completed-games { display: flex; min-width: 0; justify-content: center; gap: 4px; overflow: hidden; }
+.pickleball-completed-games span { padding: 2px 5px; border: 1px solid var(--console-border); border-radius: 5px; color: var(--console-muted); font-size: 8px; font-weight: 800; white-space: nowrap; }
+.pickleball-screen-swap { color: var(--console-amber); font-size: 8px; font-weight: 800; }
+.pickleball-match-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
+.pickleball-match-actions.with-server { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.pickleball-match-actions .console-action-button { padding-inline: 3px; font-size: 9px; }
+.pickleball-pending-action { position: absolute; right: 6px; bottom: 57px; left: 6px; padding: 3px; border-radius: 5px; background: rgba(245,165,36,.16); color: var(--console-amber); font-size: 9px; font-weight: 800; }
+
+.console-rotate-notice { display: none; }
+.console-load-state { display: flex; min-height: 100vh; min-height: 100dvh; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 24px; background: var(--console-bg); color: var(--console-text); text-align: center; }
+.console-load-state h1, .console-load-state p { margin: 0; }
+.console-load-state p { color: var(--console-muted); }
+.console-load-state button, .console-rotate-notice button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 7px; padding: 10px 16px; border: 1px solid var(--console-blue); border-radius: 9px; background: #0D3154; color: #FFF; font-weight: 800; }
+.console-load-state button.secondary { border-color: var(--console-border); background: var(--console-panel); }
+.console-load-state.error > svg { color: var(--console-red); }
+
+@media (max-width: 860px) and (orientation: landscape) {
+  .console-header { min-height: 50px; padding-block: 2px; }
+  .console-icon-button { height: 48px; }
+  .console-header-meta span:first-child { display: none; }
+  .console-footer { padding-block: 6px; }
+  .console-footer-safety { display: none; }
+  .console-shell-preview article, .console-shell-preview > div { padding: 10px; }
+  .basketball-console { grid-template-columns: minmax(0, 1fr) minmax(230px, .8fr) minmax(0, 1fr); }
+  .basketball-console-team { padding: 6px; }
+  .basketball-console-clock { padding-inline: 5px; }
+  .volleyball-console { grid-template-columns: minmax(0, 1fr) minmax(235px, .82fr) minmax(0, 1fr); }
+  .volleyball-console-team { padding: 6px; }
+  .volleyball-console-center { padding-inline: 5px; }
+  .pickleball-console { grid-template-columns: minmax(0, 1fr) minmax(290px, 1.08fr) minmax(0, 1fr); }
+  .pickleball-console-team { padding-inline: 6px; }
+}
+
+@media (max-height: 380px) and (orientation: landscape) {
+  .console-header { min-height: 48px; }
+  .console-icon-button { height: 48px; min-height: 48px; }
+  .console-status-item { min-height: 30px; }
+  .console-action-feedback { min-height: 26px; }
+  .console-footer { padding-block: 3px; }
+  .basketball-console-team { grid-template-rows: 24px minmax(42px, 1fr) auto; gap: 3px; padding-block: 4px; }
+  .basketball-score-actions, .basketball-console-clock, .basketball-clock-actions { gap: 3px; }
+  .basketball-console-clock { padding-block: 4px; }
+  .basketball-period { padding-block: 1px; }
+  .volleyball-console-team { grid-template-rows: 24px minmax(42px, 1fr) auto; gap: 3px; padding-block: 4px; }
+  .volleyball-score-actions, .volleyball-console-center { gap: 3px; }
+  .volleyball-console-center { padding-block: 3px; }
+  .volleyball-rule-message { min-height: 32px; }
+  .volleyball-match-format { display: none; }
+  .pickleball-console-team { grid-template-rows: 31px minmax(37px, 1fr) 16px auto; gap: 2px; padding-block: 3px; }
+  .pickleball-console-center, .pickleball-score-actions, .pickleball-match-actions { gap: 3px; }
+  .pickleball-console-center { padding-block: 3px; }
+  .pickleball-format { display: none; }
+  .pickleball-state-message { min-height: 27px; }
+}
+
+@media (orientation: portrait) and (max-width: 1024px) {
+  .scorer-console-landscape { display: none; }
+  .console-rotate-notice { display: flex; min-height: 100vh; min-height: 100dvh; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: calc(24px + env(safe-area-inset-top)) calc(20px + env(safe-area-inset-right)) calc(24px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left)); color: var(--console-text); text-align: center; }
+  .console-rotate-notice > svg { color: var(--console-blue); }
+  .console-rotate-notice h1, .console-rotate-notice p { margin: 0; }
+  .console-rotate-notice p { color: var(--console-muted); }
+  .console-rotate-notice > div { display: grid; width: min(100%, 360px); gap: 9px; margin-top: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .console-action-feedback.pending .console-feedback-dot, .basketball-shot-clock.expired output { animation: none; }
+  .console-action-button:not(:disabled):active { transform: none; }
+}
