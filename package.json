@@ -2,6 +2,7 @@
   "name": "barangay-league-manager",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "description": "Offline-first barangay sports league management system",
   "engines": {
     "node": "^20.19.0 || >=22.12.0"

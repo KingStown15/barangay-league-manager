@@ -90,4 +90,4 @@ This is a source-code showcase and developer edition extracted from a local-firs
 
 ## License
 
-No open-source license is included yet. Confirm ownership and reuse permissions for project branding and any future screenshots before adding a license.
+This project's original source code is licensed under the MIT License. See LICENSE for details.
